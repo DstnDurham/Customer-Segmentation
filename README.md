@@ -6,12 +6,16 @@ Customer segmentation is the process of dividing current and prospective custome
 
 In dividing markets, researchers search for common characteristics such as demographics, geographical location, and behavior trends. The segments an organization uses vary depending on its size and industry. 
 
-- **Demographics:** Factors such as age, race, religion, gender, family size, ethnicity, income and education level.
-- **Geographics:** What county, state, city and town the person lives in.
-- **Behavior:** This considers tendencies, habits, spending, product use and desired benefits.
-- **Needs:** Requirements for a product or service for different customer groups.
+- #### **Demographics:** 
+Factors such as age, race, religion, gender, family size, ethnicity, income and education level.
+- #### **Geographics:**
+What county, state, city and town the person lives in.
+- #### **Behavior:**
+This considers tendencies, habits, spending, product use and desired benefits.
+- #### **Needs-Based:**
+Requirements for a product or service for different customer groups.
 
-
+Business-to-Business (B2B) and Business-to-Consumer (B2C) are two 
 ## Objective 
 
 ### Questions to Answer:
