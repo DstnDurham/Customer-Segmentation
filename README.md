@@ -37,23 +37,25 @@ This project aims to helps to predict the right group of the new customers.
 ### Exploratory Analysis
 
 Attribute Information:
-This data contains 2,627 potential customer records with 10 variables. Of the 10 variables, 6 contain missing values.
-- **ID**:
-- **Gender**:
-- **Ever_Married**:
-- **Age**:
-- **Graduated**:
-- **Profession**:
-- **Work_Experience**:
-- **Spending_Score**:
-- **Family_Size**:
-- **Var_1**:
+This data contains 2,627 potential customer records with 10 variables.
+- **ID**: The unique customer ID.
+- **Gender**: Gender of the customer (Male/Female).
+- **Ever_Married**: Marital status of the customer.
+- **Age**: Customer age in years. 
+- **Graduated**: Is the customer a graduate?
+- **Profession**: Profession of the customer.
+- **Work_Experience**: Work Experience in years.
+- **Spending_Score**: Customer spending score.
+- **Family_Size**: Number of family members for the customer (including the customer).
+- **Var_1**: Anonymised Category for the customer.
 
 ## Preprocessing 
 Before applying K-means, it is essential to prepare the data to ensure accurate and meaningful
 results.
 
 ### Data Cleaning 
+Of the 10 variables, 6 contain missing values.
+
 
 ### Data Transformation
 
