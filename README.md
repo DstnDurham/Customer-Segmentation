@@ -150,7 +150,7 @@ The Silhouette Coefficient ranges from -1 (poor clustering) to 1 (well-separated
 k_values = range(2, 11) 
 
 for k in k_values:
-    kmeans = KMeans(n_clusters=k)
+    kmeans = KMeans(n_clusters=k,random_state = 0, n_init=10)
     labels = kmeans.fit_predict(X)
     score = silhouette_score(X, labels)
     print(f"Silhouette score for k={k}: {score:.2f}")
