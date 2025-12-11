@@ -1,5 +1,5 @@
 # Customer Segmentation
-Find the dataset [HERE](https://www.kaggle.com/datasets/vetrirah/customer)
+Find the dataset [HERE](https://www.gigasheet.com/sample-data/customer-segmentation)
 
 ## Overview
 Customer segmentation is the process of dividing current and prospective customers into meaningful sub-groups based on shared metrics and traits. Businesses can refine targeted marketing measures and strategies to smaller, specific groups supported by a deep understanding of consumer preferences and needs. 
@@ -24,40 +24,83 @@ Though both processess involve taking the needs, behaviors, and characteristics 
   
 -  B2C marketers might segment customers based on demographic details like income, family or relationship status, and age group. B2B marketers might segment customers based on industry, company size, revenue, and the roles and teams within.
   
-## Objective 
+## Objective
 
-An automobile company has plans to enter new markets with their existing products (P1, P2, P3, P4 and P5). After intensive market research, they’ve deduced that the behavior of new market is similar to their existing market. 
-
-In their existing market, the sales team has classified all customers into 4 segments (A, B, C, D ). Then, they performed segmented outreach and communication for different segment of customers. This strategy has work exceptionally well for them. They plan to use the same strategy on new markets and have identified 2627 new potential customers. 
-
-This project aims to helps to predict the right group of the new customers.
-
-## Analysis
+This project aims to analyze a dataset of 2000 customers covering demographics, income, spending score, profession, work experience, and family size in order to perform customer segmentation. In order to generate actionable insights that support targeted marketing strategies, improve customer engagement, and demonstrate the ability to apply data-driven decision-making techniques in a real-world context.
 
 ### Exploratory Analysis
+```
+df = pd.read_csv('Cust_Seg.csv')
+df.head()
+```
+<img width="810" height="142" alt="image" src="https://github.com/user-attachments/assets/3381ae26-7bbd-4292-8918-7acff6714328" />
 
 Attribute Information:
-This data contains 2,627 potential customer records with 10 variables.
-- **ID**: The unique customer ID.
+This data contains 2,000 potential customer records with 8 variables.
+- **Customer ID**: The unique customer ID.
 - **Gender**: Gender of the customer (Male/Female).
-- **Ever_Married**: Marital status of the customer.
 - **Age**: Customer age in years. 
-- **Graduated**: Is the customer a graduate?
+- **Annual Income ($)**: Customer annual income in USD.
+- **Spending_Score (1-100)**: Customer spending score.
 - **Profession**: Profession of the customer.
 - **Work_Experience**: Work Experience in years.
-- **Spending_Score**: Customer spending score.
 - **Family_Size**: Number of family members for the customer (including the customer).
-- **Var_1**: Anonymised Category for the customer.
 
-## Preprocessing 
+## Value Distribution
+Checking value distributions using histograms before preprocessing and cleaning. 
+```
+fig, ax = plt.subplots(figsize=(14,10))
+df.drop(columns='CustomerID').hist(ax=ax)
+
+plt.show()
+```
+<img width="1147" height="836" alt="image" src="https://github.com/user-attachments/assets/636ae6fe-5032-43ba-bdbd-87187adc7afa" />
+
+From these histograms, it can be observed that:
+- **Age**: The dataset spans all ages evenly without a dominant group.
+- **Annual Income ($)**: Most individuals earn between $75K–$100K.
+- **Spending_Score (1-100)**: Spending behavior is evenly distributed across the scale. 
+- **Work_Experience**: Majority have 0 years; frequency drops steadily with more experience. 
+- **Family_Size**: Small families of 1–3 members are most common, with larger households being less common.
+  
+A correlation heat map is then used to visualize the relationships between variables. Correlation coefficients quantify the relationship between two variables, ranging from -1 to +1. 
+- +1: Perfect positive correlation. When one variable increases, the other increases proportionally.
+- 0: No linear relationship between the variables.
+- -1: Perfect negative correlation. When one variable increases, the other decreases proportionally.
+ 
+```
+corr_map = df.drop(columns='CustomerID').corr(numeric_only=True)
+
+plt.figure(figsize=(10, 8))
+sns.heatmap(corr_map, annot=True, cmap='coolwarm', linewidths=0.5)
+plt.title("Correlation Heat Map")
+plt.tight_layout()
+plt.show()
+```
+<img width="930" height="790" alt="image" src="https://github.com/user-attachments/assets/79a8d896-6d4c-4e27-aafc-60a068c338d1" />
+
+The heatmap does not reveal much. None of the variables show strong correlations (all values are close to 0). 
+
+- **Age vs. Spending Score:** Slight negative correlation (-0.04). Older customers tend to spend a bit less, but the effect is weak.
+- **Annual Income vs. Spending Score:** Very weak positive correlation (0.02). Income doesn’t strongly predict spending score.
+- **Work Experience vs. Annual Income:** Small positive correlation (0.09). More experience is linked to slightly higher income.
+- **Family Size vs. Annual Income:** Weak positive correlation (0.09). Larger families may have slightly higher income.
+- **Age vs. Family Size:** Small positive correlation (0.04). Older individuals tend to have slightly larger families.
+
+This suggests that spending behavior is not strongly driven by age, income, work experience, or family size in this dataset.
+
+### Data Preprocessing and Cleaning
 Before applying K-means, it is essential to prepare the data to ensure accurate and meaningful
-results.
+results. There are 2,000 values on this dataset, of the 8 variables, 1 column (Profession) contains missing values.
 
-### Data Cleaning 
-Of the 10 variables, 6 contain missing values.
+<img width="253" height="276" alt="image" src="https://github.com/user-attachments/assets/a655692b-38ad-4734-896e-e4d41f4d0ded" />
 
+Seeing as only 35 values are missing, this is only 1.75% of the dataset, so they were removed removed.
+
+<img width="255" height="368" alt="Screenshot 2025-12-11 at 1 20 36 AM" src="https://github.com/user-attachments/assets/b997f216-752a-48d1-8d55-3374844b297e" />
 
 ### Data Transformation
+
 
 ## Cluster Development
 
