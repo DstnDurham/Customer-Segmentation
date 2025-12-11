@@ -95,7 +95,7 @@ results. There are 2,000 values on this dataset, of the 8 variables, 1 column (P
 
 <img width="253" height="276" alt="image" src="https://github.com/user-attachments/assets/a655692b-38ad-4734-896e-e4d41f4d0ded" />
 
-Seeing as only 35 values are missing, which is 1.75% of the dataset, they were removed removed.
+Seeing as only 35 values are missing, which is 1.75% of the dataset, they were removed.
 
 <img width="255" height="368" alt="Screenshot 2025-12-11 at 1 20 36 AM" src="https://github.com/user-attachments/assets/b997f216-752a-48d1-8d55-3374844b297e" />
 
@@ -159,7 +159,7 @@ for k in k_values:
 
 ### Setting up K-Means
 
-The clusters were developed using KMeans from sklearn.cluster
+The clusters were 
 
 ## Fitting the Model
 
