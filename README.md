@@ -95,14 +95,67 @@ results. There are 2,000 values on this dataset, of the 8 variables, 1 column (P
 
 <img width="253" height="276" alt="image" src="https://github.com/user-attachments/assets/a655692b-38ad-4734-896e-e4d41f4d0ded" />
 
-Seeing as only 35 values are missing, this is only 1.75% of the dataset, so they were removed removed.
+Seeing as only 35 values are missing, which is 1.75% of the dataset, they were removed removed.
 
 <img width="255" height="368" alt="Screenshot 2025-12-11 at 1 20 36 AM" src="https://github.com/user-attachments/assets/b997f216-752a-48d1-8d55-3374844b297e" />
 
 ### Data Transformation
 
+K-means relies on distance-based measurements, so before applying K-Means clustering, the categorical values need to be transformed into a numerical representation. To start, the numerical and categorical values were seperated. 
+
+```
+categorical_cols = df.select_dtypes(include=['object']).columns.tolist()
+numeric_cols = df.select_dtypes(include=['int64','float64']).columns.tolist()
+```
+
+Next, the categorical data was one-hot encoded. One Hot Encoding is a method for converting categorical variables into a binary format. It creates new columns for each category where 1 means the category is present and 0 means it is not. 
+
+```
+df_encoded = pd.get_dummies(df, columns=categorical_cols)
+df_encoded.info()
+```
+<img width="394" height="464" alt="image" src="https://github.com/user-attachments/assets/8a720b4b-2a12-4f6f-aa12-d6c35d60008a" />
+
+
+The data was then normalized using standard scaler to reduce the impact of outliers and noise, making it easier for the algorithm to identify clusters.
+
+```
+X = StandardScaler().fit_transform(df_encoded)
+```
 
 ## Cluster Development
+
+To determine the proper number of clusters, the elbow method and sihlouette scores were utilized. The Elbow Method helps by plotting the Within-Cluster Sum of Squares (WCSS) against increasing k values and looking for a point where the improvement slows down, this point is called the "elbow." The Silhouette Coefficient ranges from -1 (poor clustering) to 1 (well-separated clusters), with values near 0 indicating overlapping clusters
+
+```
+wcss = []
+K = range(2, 11)
+
+for k in K:
+    kmeans = KMeans(n_clusters=k)
+    kmeans.fit(X)
+    wcss.append(kmeans.inertia_)
+
+plt.figure(figsize=(8,5))
+plt.plot(K, wcss, 'bo-')
+plt.xlabel('Number of clusters (k)')
+plt.ylabel('WCSS (Inertia)')
+plt.title('Elbow Method For Optimal K')
+plt.show()
+```
+<img width="713" height="470" alt="image" src="https://github.com/user-attachments/assets/22f8e8c8-6e9d-4c4f-9179-845eccc3e18c" />
+
+The Silhouette Coefficient ranges from -1 (poor clustering) to 1 (well-separated clusters), with values near 0 indicating overlapping clusters
+```
+k_values = range(2, 11) 
+
+for k in k_values:
+    kmeans = KMeans(n_clusters=k)
+    labels = kmeans.fit_predict(X)
+    score = silhouette_score(X, labels)
+    print(f"Silhouette score for k={k}: {score:.2f}")
+```
+<img width="235" height="198" alt="image" src="https://github.com/user-attachments/assets/a755215e-1ba1-4558-b5c3-d320f8978690" />
 
 ### Setting up K-Means
 
