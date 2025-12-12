@@ -200,32 +200,31 @@ numeric_cols = df.select_dtypes(include=np.number).drop(['CustomerID', 'Cluster'
 fig = plt.figure(figsize=(20, 20))
 
 for i, column in enumerate(numeric_cols):
-    df_plot = df.groupby('Cluster')[column].mean()
+    df_plot = df.groupby('Cluster')[column].mean().reset_index()  
     ax = fig.add_subplot(5, 2, i+1)
-    ax.bar(df_plot.index, df_plot, color=sns.color_palette('coolwarm'), alpha=0.6)
-    ax.set_title(f'Average {column.title()} per Cluster', alpha=0.5)
-    ax.xaxis.grid(False)
+    sns.barplot(x= 'Cluster',hue='Cluster', y=column, data=df_plot, palette='coolwarm', ax=ax,legend=False)
+    ax.set_title(f'Average {column.title()} per Cluster')
+
     
 plt.tight_layout()    
 plt.show()
 ```
-<img width="1990" height="1210" alt="image" src="https://github.com/user-attachments/assets/ca65896a-74e1-432e-885a-4794032c20da" />
+<img width="1989" height="1221" alt="image" src="https://github.com/user-attachments/assets/905e1300-5ef9-4b82-ac81-10f82f7278cb" />
 
 Examining the distribution of categorical variables across clusters:
 ```
 fig = plt.figure(figsize=(20, 20))
 
 for i, column in enumerate(categorical_cols):
-    df_plot = df.groupby(['Cluster', column]).size().unstack(fill_value=0)
+    df_plot = df.groupby(['Cluster', column]).size().reset_index(name='count')
     ax = fig.add_subplot(5, 2, i+1)
-    df_plot.plot(kind='bar', stacked=True, ax=ax, colormap='coolwarm', alpha=0.7)
-    ax.set_title(f'Distribution of {column.title()} per Cluster', alpha=0.5)
-    ax.xaxis.grid(False)
-
+    sns.barplot(x=column,y='count',hue='Cluster',data = df_plot, palette='coolwarm',legend = True,ax=ax)
+    ax.set_title(f'Distribution of {column.title()} per Cluster')
+    
 plt.tight_layout()
 plt.show()
 ```
-<img width="1990" height="427" alt="image" src="https://github.com/user-attachments/assets/fe6d28ca-4eee-4290-bec3-38e7ad3ca6b3" />
+<img width="1989" height="428" alt="image" src="https://github.com/user-attachments/assets/17864110-9ad8-4fc8-9d07-3a19e78daecf" />
 
 ## Conclusion
 
