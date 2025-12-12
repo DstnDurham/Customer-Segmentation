@@ -159,15 +159,73 @@ for k in k_values:
 
 ### Setting up K-Means
 
-The clusters were 
+The K-Means model was build after determining the optimal number of clusters. Then, the assigned cluster was then added into the dataframe.
 
-## Fitting the Model
+```
+clusterNum = 9
+k_means = KMeans(n_clusters = clusterNum,random_state=0, n_init=10)
+k_means.fit(X)
+y = k_means.labels_
 
-## Results
+df['Cluster'] = y + 1
+```
+Checking the customers in each cluster.
+```
+df['Cluster'].value_counts(ascending=True)
+```
+<img width="86" height="230" alt="image" src="https://github.com/user-attachments/assets/706927e0-ea37-4a21-a91b-7eba2df894b3" />
+
+## Analyzing Results
 
 ### Cluster Properties
 
+```
+cluster_profiles = df.groupby('Cluster').agg({
+    'Gender': lambda x: x.mode()[0],
+    'Age': 'mean',
+    'Annual Income ($)': 'mean',
+    'Spending Score (1-100)': 'mean',
+    'Profession': lambda x: x.mode()[0],
+    'Work Experience': 'mean',
+    'Family Size': 'mean'
+}).reset_index().round(2)
+
+print(cluster_profiles)
+```
 ## Output Interpretation
+
+Examining the average values of numeric variables for each cluster:
+```
+numeric_cols = df.select_dtypes(include=np.number).drop(['CustomerID', 'Cluster'], axis=1).columns
+fig = plt.figure(figsize=(20, 20))
+
+for i, column in enumerate(numeric_cols):
+    df_plot = df.groupby('Cluster')[column].mean()
+    ax = fig.add_subplot(5, 2, i+1)
+    ax.bar(df_plot.index, df_plot, color=sns.color_palette('coolwarm'), alpha=0.6)
+    ax.set_title(f'Average {column.title()} per Cluster', alpha=0.5)
+    ax.xaxis.grid(False)
+    
+plt.tight_layout()    
+plt.show()
+```
+<img width="1990" height="1210" alt="image" src="https://github.com/user-attachments/assets/ca65896a-74e1-432e-885a-4794032c20da" />
+
+Examining the distribution of categorical variables across clusters:
+```
+fig = plt.figure(figsize=(20, 20))
+
+for i, column in enumerate(categorical_cols):
+    df_plot = df.groupby(['Cluster', column]).size().unstack(fill_value=0)
+    ax = fig.add_subplot(5, 2, i+1)
+    df_plot.plot(kind='bar', stacked=True, ax=ax, colormap='coolwarm', alpha=0.7)
+    ax.set_title(f'Distribution of {column.title()} per Cluster', alpha=0.5)
+    ax.xaxis.grid(False)
+
+plt.tight_layout()
+plt.show()
+```
+<img width="1990" height="427" alt="image" src="https://github.com/user-attachments/assets/fe6d28ca-4eee-4290-bec3-38e7ad3ca6b3" />
 
 ## Conclusion
 
