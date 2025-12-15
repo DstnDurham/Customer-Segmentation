@@ -26,7 +26,7 @@ Though both processess involve taking the needs, behaviors, and characteristics 
   
 ## Objective
 
-This project aims to analyze a dataset of 2000 customers covering demographics, income, spending score, profession, work experience, and family size in order to perform customer segmentation. In order to generate actionable insights that support targeted marketing strategies, improve customer engagement, and demonstrate the ability to apply data-driven decision-making techniques in a real-world context.
+This project aims to analyze a dataset of 2000 customers covering demographics, income, spending score, profession, work experience, and family size in order to perform customer segmentation in order to generate actionable insights that support targeted marketing strategies, improve customer engagement, and demonstrate the ability to apply data-driven decision-making techniques in a real-world context.
 
 ### Exploratory Analysis
 ```
@@ -46,7 +46,7 @@ This data contains 2,000 potential customer records with 8 variables.
 - **Work_Experience**: Work Experience in years.
 - **Family_Size**: Number of family members for the customer (including the customer).
 
-## Value Distribution
+#### Value Distribution
 
 ```
 df['Gender'].value_counts()
