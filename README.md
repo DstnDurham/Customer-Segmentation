@@ -26,7 +26,7 @@ Though both processess involve taking the needs, behaviors, and characteristics 
   
 ## Objective
 
-This project aims to analyze a dataset of 2000 customers covering demographics, income, spending score, profession, work experience, and family size in order to perform customer segmentation in order to generate actionable insights that support targeted marketing strategies, improve customer engagement, and demonstrate the ability to apply data-driven decision-making techniques in a real-world context.
+This project aims to analyze a dataset of 2,000 customers covering demographics, income, spending score, profession, work experience, and family size. The goal is to generate actionable insights that support targeted marketing strategies, improve customer engagement, and demonstrate the ability to apply data-driven decision-making techniques in a real-world context.
 
 ### Exploratory Analysis
 ```
